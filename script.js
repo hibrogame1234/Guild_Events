@@ -199,13 +199,16 @@ function updateStatusUI() {
 
         const diff = endTime - now; // Khoảng cách thời gian (miliseconds)
 
-        if (diff > 0) {
-            const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
-            const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-            const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-
-            statusEl.innerHTML = `🟢 ĐANG DIỄN RA - KẾT THÚC SAU: <span style="font-family: monospace;">${h}:${m}:${s}</span>`;
+       if (diff > 0) {
+            statusEl.innerHTML = `
+                <div style="font-size: 0.9rem; margin-bottom: 3px;">🟢 ĐANG DIỄN RA</div>
+                <div style="font-size: 1.8rem; font-weight: 800; letter-spacing: 1px;">
+                    KẾT THÚC SAU: <span style="font-family: 'Courier New', monospace;">${h}:${m}:${s}</span>
+                </div>
+            `;
             statusEl.style.background = "#7cffb3";
+            statusEl.style.padding = "15px"; // Thêm chút đệm cho khung to ra
+
         } else {
             statusEl.innerText = "🔴 SỰ KIỆN VỪA KẾT THÚC!";
             statusEl.style.background = "#f79290";
