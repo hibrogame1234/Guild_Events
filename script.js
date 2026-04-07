@@ -200,16 +200,21 @@ function updateStatusUI() {
         const diff = endTime - now; // Khoảng cách thời gian (miliseconds)
 
        if (diff > 0) {
-            statusEl.innerHTML = `
-                <div style="font-size: 0.9rem; margin-bottom: 3px;">🟢 ĐANG DIỄN RA</div>
-                <div style="font-size: 1.8rem; font-weight: 800; letter-spacing: 1px;">
-                    KẾT THÚC SAU: <span style="font-family: 'Courier New', monospace;">${h}:${m}:${s}</span>
-                </div>
-            `;
-            statusEl.style.background = "#7cffb3";
-            statusEl.style.padding = "15px"; // Thêm chút đệm cho khung to ra
+    // Tính toán h, m, s như cũ...
+    const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
+    const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+    const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
 
-        } else {
+    statusEl.innerHTML = `
+        <div style="font-size: 1rem; margin-bottom: 5px; opacity: 0.8;">🟢 ĐANG DIỄN RA - KẾT THÚC SAU:</div>
+        <div style="font-size: 3.5rem; font-weight: 900; font-family: 'Courier New', monospace; line-height: 1;">
+            ${h}:${m}:${s}
+        </div>
+    `;
+    statusEl.style.background = "#7cffb3";
+    statusEl.style.padding = "20px 10px"; // Tăng độ rộng của khung nền
+    statusEl.style.color = "#000";
+} else {
             statusEl.innerText = "🔴 SỰ KIỆN VỪA KẾT THÚC!";
             statusEl.style.background = "#f79290";
         }
