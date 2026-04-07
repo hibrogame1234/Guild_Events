@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigame Đua top nhân phẩm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <nav class="game-nav">
+            <a href="index.html" class="nav-item active">🎲 Xúc Xắc</a>
+            <a href="vongquay.html" class="nav-item">🎡 Vòng Quay</a>
+        </nav>
+
+        <header>
+            <h1>LALABOY</h1>
+            <div class="event-tag">EVENT ĐUA TOP NHÂN PHẨM - 20H THỨ 7 HÀNG TUẦN</div>
+            <img src="img/logoBang.png">
+            <div id="timer-status" class="event-tag" style="background: #eb4d4b; margin-top: 10px;"></div>
+        </header>
+
+        <div class="main-layout">
+            <div class="game-side">
+                <div class="player-section">
+                    <input type="text" id="username" placeholder="Nhập tên chính xác Ingame đã đăng kýc..." maxlength="30">
+                    <div class="dice-box">
+                        <div class="scene"><div class="cube" id="cube1"><div class="face front"></div><div class="face back"></div><div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div></div></div>
+                        <div class="scene"><div class="cube" id="cube2"><div class="face front"></div><div class="face back"></div><div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div></div></div>
+                        <div class="scene"><div class="cube" id="cube3"><div class="face front"></div><div class="face back"></div><div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div></div></div>
+                    </div>
+                    <button id="roll-btn">QUAY SỐ NGAY</button>
+                    <h2 id="total-score">Điểm của bạn: 0</h2>
+                </div>
+                <div class="leaderboard card">
+                    <h3>🏆 BẢNG VÀNG NHÂN PHẨM</h3>
+                    <table>
+                        <thead><tr><th>Hạng</th><th>Nhân vật</th><th>Điểm</th></tr></thead>
+                        <tbody id="score-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="info-side">
+                <div class="card rewards">
+                    <h3>🎁 MỐC QUÀ TẶNG</h3>
+                    <ul>
+                        <li>🥇 Top 1: 100 mảnh B2 + 3M Ngọc</li>
+                        <li>🥈 Top 2: 50 mảnh B2 + 2M Ngọc</li>
+                        <li>🥉 Top 3: 25 mảnh B2 + 1M Ngọc</li>
+                        <li>🎖️ Top 4-5: 500K Ngọc</li>
+                    </ul>
+                </div>
+                <div class="card rules">
+                    <h3>📜 LUẬT CHƠI</h3>
+                    <p>• Mỗi Ingame chỉ quay <b>01 lần/tuần</b>.</p>
+                    <p>• Bằng điểm: (ví dụ: top 1 vs 2 = điểm thì quà mỗi ng nhận là 75 mãnh b2 vs 2m5 ngọc Hoặc nhiều người bằng điểm vs top 5 thì sẽ roll lần 2 để xác định người may mắn)
+
+</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-panel" class="hidden">
+            <button id="reset-btn">RESET TOÀN BỘ TRÒ CHƠI</button>
+        </div>
+        <p class="hint">Nhấn phím 'Quần què' để mở Admin</p>
+    </div>
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+  // Cấu hình Firebase (Lấy trong phần Project Settings của Firebase)
+        const firebaseConfig = {
+        apiKey: "AIzaSyB7X2zIrQu8YvH1g9D3a1sLQA-rrzRCLfc",
+        authDomain: "lalaboy-minigame.firebaseapp.com",
+        databaseURL: "https://lalaboy-minigame-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "lalaboy-minigame",
+        storageBucket: "lalaboy-minigame.firebasestorage.app",
+        messagingSenderId: "295321122434",
+        appId: "1:295321122434:web:a75965125b62ba8cb3669b",
+        measurementId: "G-Q0K9H98P86"
+        };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // Xuất các biến này ra toàn cục để file script.js của bạn dùng được
+  window.db = db;
+  window.dbRef = ref;
+  window.dbSet = set;
+  window.dbPush = push;
+  window.dbOnValue = onValue;
+  window.dbRemove = remove;
+</script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
