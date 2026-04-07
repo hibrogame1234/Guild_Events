@@ -1,0 +1,113 @@
+:root {
+    --bg-color: #1a1a2e;
+    --card-bg: #24243e;
+    --accent-color: #4834d4;
+    --text-color: #ffffff;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 20px;
+}
+
+.wheel-container { max-width: 1200px; margin: 0 auto; text-align: center; }
+
+/* Navigation */
+.game-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
+.nav-item { 
+    padding: 10px 25px; border-radius: 20px; background: #333; 
+    color: white; text-decoration: none; transition: 0.3s;
+}
+.nav-item.active { background: var(--accent-color); }
+
+/* Input Section */
+.input-section { max-width: 500px; margin: 0 auto 30px; padding: 15px; }
+#username {
+    width: 90%; padding: 12px; border-radius: 8px; border: 2px solid var(--accent-color);
+    background: #1e1e2f; color: white; text-align: center; outline: none;
+}
+
+/* Layout */
+.main-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+
+/* Wheel */
+.wheel-wrapper { position: relative; width: 500px; height: 500px; margin: 0 auto; }
+.pointer {
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 0; border-left: 15px solid transparent;
+    border-right: 15px solid transparent; border-top: 30px solid #ff4757; z-index: 10;
+}
+#spin-btn {
+    margin-top: 20px; padding: 15px 50px; font-size: 1.2rem; font-weight: bold;
+    background: var(--accent-color); color: white; border: none; border-radius: 10px; cursor: pointer;
+}
+
+/* Cards & Tables */
+.card-fancy { background: var(--card-bg); border-radius: 15px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.table-container { background: rgba(0,0,0,0.2); border-radius: 8px; margin-top: 10px; }
+.ranking-table { width: 100%; border-collapse: collapse; }
+.ranking-table th { padding: 12px; background: rgba(72, 52, 212, 0.2); color: #888; font-size: 0.8rem; }
+.ranking-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.history-name { color: #fffa65; font-weight: bold; }
+
+/* Admin Modal */
+.modal-overlay {
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 999;
+}
+.btn-danger { background: #ff4757; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+#close-modal { background: #555; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-left: 10px; cursor: pointer; }
+
+/* Responsive cho Vòng Quay */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* Xử lý vòng quay co giãn */
+.wheel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Không vượt quá 500px */
+    height: auto;
+    aspect-ratio: 1 / 1; /* Giữ khung hình vuông */
+    margin: 0 auto;
+}
+
+#wheelCanvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+@media (max-width: 992px) {
+    .main-layout {
+        grid-template-columns: 1fr; /* Tablet và Mobile chồng lên nhau */
+    }
+}
+
+@media (max-width: 600px) {
+    body { padding: 10px; }
+    
+    .input-section {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .wheel-wrapper {
+        max-width: 300px; /* Nhỏ lại trên điện thoại nhỏ */
+    }
+    
+    .pointer {
+        border-top-width: 20px;
+        border-left-width: 10px;
+        border-right-width: 10px;
+    }
+    
+    .ranking-table th, .ranking-table td {
+        padding: 8px 5px;
+        font-size: 0.85rem;
+    }
+}
