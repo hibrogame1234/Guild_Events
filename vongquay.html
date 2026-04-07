@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigame vòng quay may mắn</title>
+    <link rel="stylesheet" href="style_vongquay.css">
+</head>
+<body>
+    <div class="wheel-container">
+        <nav class="game-nav">
+            <a href="index.html" class="nav-item">🎲 Xúc Xắc</a>
+            <a href="vongquay.html" class="nav-item active">🎡 Vòng Quay</a>
+        </nav>
+
+        <header>
+            <h1>LALAB0Y - EVENT THÁNG</h1>
+            <div class="event-tag"> VÒNG QUAY MAY MẮN - 20H THỨ 7 TUẦN CUỐI THÁNG </div>
+            <img src="img/logoBang.png">
+            <div id="timer-status" class="event-tag" style="
+                text-align: center; 
+                font-weight: bold; 
+                padding: 12px; 
+                border-radius: 8px; 
+                margin: 15px auto; 
+                max-width: 400px;
+                color: #000; /* Chữ màu đen như bạn muốn */
+                transition: all 0.5s ease;
+            ">
+                Đang tải trạng thái sự kiện...
+            </div>
+        </header>
+
+        <div class="input-section card-fancy">
+            <input type="text" id="username" placeholder="Nhập chính xác ingame đã đăng ký...">
+        </div>
+
+        <div class="main-layout">
+            <div class="wheel-side">
+                <div class="wheel-wrapper">
+                    <div class="pointer"></div>
+                    <canvas id="wheelCanvas" width="500" height="500"></canvas>
+                </div>
+                <button id="spin-btn">QUAY NGAY</button>
+                <h2 id="result-text">Chúc bro may mắn!</h2>
+            </div>
+
+            <div class="info-side">
+                <div class="card-fancy">
+                    <h3>🎁 PHẦN THƯỞNG</h3>
+                    <ul id="prize-list-display">
+                        </ul>
+                </div>
+
+                <div class="card-fancy history-section">
+                    <div class="history-header">
+                        <h3>🏆 LỊCH SỬ NHẬN THƯỞNG</h3>
+                        <span class="admin-hint">Nhấn 'Cái đậu xanh' để quản lý</span>
+                    </div>
+                    <div class="table-container">
+                        <table class="ranking-table">
+                            <thead>
+                                <tr>
+                                    <th>Thời gian</th>
+                                    <th>Nhân vật</th>
+                                    <th>Vật phẩm</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content card-fancy">
+            <h3>⚙️ CẤU HÌNH VÒNG QUAY</h3>
+            <div style="text-align: left; margin-bottom: 15px;">
+                <label>Ngày mở (1-31): <input type="number" id="edit-date-month" min="1" max="31" style="width: 50px;"></label><br><br>
+                <label>Bắt đầu: <input type="number" id="edit-start" min="0" max="23" style="width: 50px;"> giờ</label><br><br>
+                <label>Kết thúc: <input type="number" id="edit-end" min="0" max="23" style="width: 50px;"> giờ</label>
+            </div>
+            
+            <div class="modal-btns">
+                <button id="save-config-btn" style="background: #27ae60;">LƯU CẤU HÌNH</button>
+                <button id="confirm-reset" class="btn-danger">RESET LỊCH SỬ</button>
+                <button id="close-modal">ĐÓNG</button>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyB7X2zIrQu8YvH1g9D3a1sLQA-rrzRCLfc",
+        authDomain: "lalaboy-minigame.firebaseapp.com",
+        databaseURL: "https://lalaboy-minigame-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "lalaboy-minigame",
+        storageBucket: "lalaboy-minigame.firebasestorage.app",
+        messagingSenderId: "295321122434",
+        appId: "1:295321122434:web:a75965125b62ba8cb3669b",
+        measurementId: "G-Q0K9H98P86"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Gán vào window để script_vongquay.js có thể đọc được
+    window.db = db;
+    window.dbRef = ref;
+    window.dbSet = set;
+    window.dbPush = push;
+    window.dbOnValue = onValue;
+    window.dbRemove = remove;
+
+    // Kích hoạt sự kiện báo hiệu Firebase đã sẵn sàng
+    window.dispatchEvent(new Event('firebase-ready'));
+</script>
+    <script type="module" src="script_vongquay.js"></script>
+</body>
+</html>
