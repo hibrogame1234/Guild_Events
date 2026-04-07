@@ -188,39 +188,34 @@ function updateStatusUI() {
     if (!statusEl) return;
 
     const now = new Date();
-    const currentDay = now.getDay();
-    const currentTimeInMs = now.getTime();
-
-    // Thiết lập mốc thời gian Bắt đầu và Kết thúc của ngày hôm nay dựa trên EVENT_CONFIG
-    const startTime = new Date(now);
-    startTime.setHours(EVENT_CONFIG.startHour, EVENT_CONFIG.startMinute || 0, 0, 0);
-
-    const endTime = new Date(now);
-    endTime.setHours(EVENT_CONFIG.endHour, EVENT_CONFIG.endMinute || 0, 0, 0);
-
-    // Ép màu chữ đen
+    
+    // Ép chữ đen cho dễ đọc
     statusEl.style.color = "#000";
 
     if (isEventOpen()) {
-        // --- LOGIC ĐẾM NGƯỢC KHI ĐANG MỞ ---
-        const diff = endTime.getTime() - now.getTime(); // Thời gian còn lại tới lúc đóng cửa
-        
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        // --- LOGIC TÍNH ĐẾM NGƯỢC ---
+        const endTime = new Date();
+        endTime.setHours(EVENT_CONFIG.endHour, EVENT_CONFIG.endMinute || 0, 0);
 
-        // Định dạng 00:00:00
-        const timeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        const diff = endTime - now; // Khoảng cách thời gian (miliseconds)
 
-        statusEl.innerHTML = `🟢 ĐANG DIỄN RA <br> <span style="font-size: 1.2rem;">KẾT THÚC SAU: ${timeStr}</span>`;
-        statusEl.style.background = "#7cffb3"; // Màu xanh sáng
+        if (diff > 0) {
+            const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
+            const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+            const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+
+            statusEl.innerHTML = `🟢 ĐANG DIỄN RA - KẾT THÚC SAU: <span style="font-family: monospace;">${h}:${m}:${s}</span>`;
+            statusEl.style.background = "#7cffb3";
+        } else {
+            statusEl.innerText = "🔴 SỰ KIỆN VỪA KẾT THÚC!";
+            statusEl.style.background = "#f79290";
+        }
     } else {
-        // --- TRẠNG THÁI KHI ĐANG KHÓA ---
+        // --- TRẠNG THÁI ĐANG KHÓA ---
         const days = ["Chủ Nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"];
         const openDay = days[EVENT_CONFIG.dayOfWeek] || "Thứ 7";
-        
-        statusEl.innerHTML = `🔴 SỰ KIỆN ĐANG KHÓA <br> <span style="font-size: 0.9rem;">Mở vào ${EVENT_CONFIG.startHour}:00 ${openDay}</span>`;
-        statusEl.style.background = "#f79290"; // Màu đỏ nhạt
+        statusEl.innerText = `🔴 SỰ KIỆN ĐANG KHÓA (Mở vào ${EVENT_CONFIG.startHour}:00 ${openDay})`;
+        statusEl.style.background = "#f79290";
     }
 }
 
