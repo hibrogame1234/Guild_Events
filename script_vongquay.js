@@ -63,6 +63,22 @@ const prizes = [
     { text: "2M NGỌC", color: "#FF8C00", chance: 10 }
 ];
 
+// Thêm đoạn này ngay dưới mảng prizes để hiển thị danh sách quà lên UI
+function displayPrizeList() {
+    const prizeListUI = document.getElementById('prize-list-display');
+    if (prizeListUI) {
+        prizeListUI.innerHTML = prizes.map(p => `
+            <li style="display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <span style="color: ${p.color}; font-weight: bold;">● ${p.text}</span>
+                <span style="opacity: 0.6; font-size: 0.8rem;">${p.chance}%</span>
+            </li>
+        `).join('');
+    }
+}
+
+// Gọi hàm này trong initGame hoặc ngay khi load trang
+displayPrizeList();
+
 let startAngle = 0;
 canvas.width = 500;
 canvas.height = 500;
