@@ -59,7 +59,7 @@ const prizes = [
     { text: "500K NGỌC", color: "#1E90FF", chance: 17 },
     { text: "5 Mãnh Khiên B3", color: "#FFB6C1", chance: 12 },
     { text: "75 Mãnh B2", color: "#20B2AA", chance: 10 },
-    { text: "5 Mãnh Mũ B3", color: "#2F4F4F", chance: 10 },
+    { text: "5 Mãnh Mũ B3", color: "#00bb00", chance: 10 },
     { text: "50 Bình 2k", color: "#FF8C00", chance: 10 }
 ];
 
