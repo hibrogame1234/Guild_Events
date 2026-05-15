@@ -52,7 +52,7 @@ const historyBody = document.getElementById('history-body');
 
 const prizes = [
     { text: "1000 GOLD", color: "#FF1493", chance: 1 },
-    { text: "50 Mảnh B2", color: "#4B0082", chance: 17 },
+    { text: "50 Mảnh B2", color: "#c97cff", chance: 17 },
     { text: "20 Mãnh Khiên B3", color: "#FFD700", chance: 4 },
     { text: "300k Ngọc", color: "#00FF7F", chance: 17 },
     { text: "100 Bình 5K", color: "#FF4500", chance: 2 },
