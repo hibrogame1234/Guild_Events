@@ -51,16 +51,16 @@ const nameInput = document.getElementById('username');
 const historyBody = document.getElementById('history-body');
 
 const prizes = [
-    { text: "2000 GOLD", color: "#FF1493", chance: 1 },
+    { text: "1000 GOLD", color: "#FF1493", chance: 1 },
     { text: "50 Mảnh B2", color: "#4B0082", chance: 17 },
-    { text: "1000 GOLD", color: "#FFD700", chance: 4 },
-    { text: "300 GOLD", color: "#00FF7F", chance: 17 },
-    { text: "1500 GOLD", color: "#FF4500", chance: 2 },
+    { text: "20 Mãnh Khiên B3", color: "#FFD700", chance: 4 },
+    { text: "1M NGỌC", color: "#00FF7F", chance: 17 },
+    { text: "100 bình 5k", color: "#FF4500", chance: 2 },
     { text: "500K NGỌC", color: "#1E90FF", chance: 17 },
-    { text: "1.5M NGỌC", color: "#FFB6C1", chance: 12 },
+    { text: "10 Mãnh Khiên B3", color: "#FFB6C1", chance: 12 },
     { text: "500 GOLD", color: "#20B2AA", chance: 10 },
-    { text: "1M NGỌC", color: "#2F4F4F", chance: 10 },
-    { text: "2M NGỌC", color: "#FF8C00", chance: 10 }
+    { text: "10 Mãnh Mũ B3", color: "#2F4F4F", chance: 10 },
+    { text: "50 bình 2k", color: "#FF8C00", chance: 10 }
 ];
 
 // Thêm đoạn này ngay dưới mảng prizes để hiển thị danh sách quà lên UI
